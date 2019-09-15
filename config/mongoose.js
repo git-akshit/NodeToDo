@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');//requiring mongoose
 
 // connect to the database
-mongoose.connect('mongodb://localhost/tasks_list_db'); //mongoose connecting to database, using connect function to connect tasks_list_db
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/tasks_list_db'); //mongoose connecting to database, using connect function to connect tasks_list_db
 
 // acquire the connection (to check if it is successful)
 const db = mongoose.connection; //when it has connected then that connection gives us access to database, db is used to access the database
