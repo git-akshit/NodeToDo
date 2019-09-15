@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <title>
+             <%= locals.title%> <!--using variable for dynamic title-->
+        </title>
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+    <body>
+        <div id="main-container"> 
+            <h1 id="page-heading"> 
+                <i class="fas fa-clipboard-list"></i>
+                To Do App </h1>
+            
+            <div id="tasks-container">
+                
+               <div id="description">
+                   <div class="descHeader">
+                     Description
+                    </div>
+                    <form action="/create-task" method="POST">
+                    <input type="text" name="task" placeholder="What do you want to do" required>
+                </div> <!-- description end  -->
+                <div id="categoryAndDate">
+                    <div id="category">
+                        <div class="smallHeaders">
+                            Category
+                        </div>
+                         <div class="select">
+                             <select name="category" required>
+                                <option value="" selected disabled hidden>Choose Category</option>
+                                 <option value="Personal">Personal</option>
+                                 <option value="Work">Work</option>
+                                 <option value="School">School</option>
+                                 <option value="Cleaning">Cleaning</option>
+                                 <option value="Other">Other</option>
+                             </select>
+
+                         </div><!-- select end  -->
+                    </div>  <!-- category end  -->
+                    <div id="calendar">
+                         <div class="smallHeaders">
+                             Date
+                         </div>
+                         <input class="date" type="date" name="date" required>
+                    </div>  <!-- calendar end  -->
+                </div>   <!-- categoryAndDate end  -->
+                <div id="addButtoncontainer">
+                    <button type="submit">Add</button>
+                </div> <!-- addButtoncontainer end  -->
+            </form>
+                <ul>
+                    <% for (let i of task_list) { %>    
+                        <li id="taskAndDelete">
+                            <div id="task">
+                            <%if (i.category == "Personal") {%>
+                                <div class="categoryTask personal">
+                            <%} else if (i.category == "Work") {%>
+                                <div class="categoryTask work">
+                            <%} else if (i.category == "School") {%>
+                                <div class="categoryTask school">
+                            <%} else if (i.category == "Cleaning") {%>
+                                <div class="categoryTask cleaning">
+                            <%} else if (i.category == "Other") {%>
+                                <div class="categoryTask other">
+                            <%}%>
+                                <%= i.category %>
+                                
+                                </div>
+                                <div id="todoAndtaskCompleted">
+                                        <div id="taskCompleted"> 
+                                                <a href="/delete-task/?id=<%= i._id %>">
+                                                    Task Completed
+                                                </a>
+                                            </div> <!-- taskCompleted end  -->
+                                    <div id="todo">
+                                        <div><%= i.task %></div>
+                                        <div class="date-calendar"><i class="far fa-calendar-alt"></i> <%= i.date %></div>
+                                    </div> <!-- todo end  -->
+                               
+                                    
+                               </div>  <!-- todoAndtaskCompleted end  -->
+                           </div> <!-- task end  -->
+                        </li>
+                    <% } %>
+                </ul>
+            </div> <!-- main-container end  -->
+        </div> <!-- tasks-container end  -->
+        <script type="text/javascript" src="/js/home.js"></script>
+    </body>
+</html>
